@@ -1,0 +1,8 @@
+Flask
+flask-cors
+pymongo
+requests
+python-dotenv
+pypdf
+cryptography
+python-docx

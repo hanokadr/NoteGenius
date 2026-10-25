@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NoteGenius – AI Notes Summarizer</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <button id="menuBtn" class="menu-btn glass" type="button" aria-label="Open saved notes" aria-controls="sidebar" aria-expanded="false">☰</button>
+
+  <div class="app">
+    <aside id="sidebar" class="sidebar glass" aria-label="Saved notes">
+      <div class="logo"><span class="logo-mark" aria-hidden="true">N</span><span>NoteGenius</span></div>
+      <button id="newBtn" class="btn primary block" type="button">+ New Summary</button>
+
+      <h2 class="side-title">Saved notes</h2>
+      <label class="sr-only" for="searchInput">Search saved notes</label>
+      <input id="searchInput" type="search" placeholder="Search title or content" autocomplete="off">
+      <ul id="notesList" class="notes-list"></ul>
+      <p id="notesEmpty" class="empty" hidden></p>
+    </aside>
+
+    <main class="main">
+      <header class="header">
+        <div>
+          <h1>NoteGenius – AI Notes Summarizer</h1>
+          <p class="sub">Turn lengthy study notes into clear summaries, important concepts, and key points in seconds.</p>
+        </div>
+        <div id="aiStatus" class="status ok" role="status"><span class="dot"></span><span id="aiStatusText">AI ready</span></div>
+      </header>
+
+      <div id="message" class="message" role="alert" hidden></div>
+
+      <form id="noteForm" class="card glass" novalidate>
+        <h2>Your notes</h2>
+        <div id="dropZone" class="drop">
+          <input id="fileInput" class="sr-only file-input" type="file" accept=".txt,.md,.pdf,.docx">
+          <label for="fileInput" class="btn ghost">Upload notes file</label>
+          <span class="drop-hint">or drop a .txt, .md, .pdf or .docx file here (max 20 MB). It is summarized automatically.</span>
+        </div>
+        <label for="noteTitle">Title</label>
+        <input id="noteTitle" type="text" maxlength="120" placeholder="Operating Systems – Module 1" autocomplete="off">
+
+        <label for="noteText">Study notes</label>
+        <textarea id="noteText" rows="10" maxlength="12000" data-max="12000"
+          placeholder="Paste your study notes here…"></textarea>
+        <div id="charCount" class="counter">0 / 12000</div>
+
+        <div class="actions">
+          <button id="summarizeBtn" class="btn primary" type="submit">Summarize Notes</button>
+          <button id="clearBtn" class="btn ghost" type="button">Clear</button>
+        </div>
+        <label class="check" for="autoSave"><input id="autoSave" type="checkbox" checked> Save to MongoDB automatically after summarizing</label>
+        <div id="loading" class="loading" hidden><span class="spinner" aria-hidden="true"></span>
+          <span id="loadingText">Generating your summary. This can take a minute.</span></div>
+      </form>
+
+      <section id="results" class="results" aria-label="Summary results" hidden>
+        <article class="card glass"><h2>Summary</h2><p id="summaryText"></p></article>
+        <article class="card glass"><h2>Key points, line by line</h2><ul id="pointsList" class="points"></ul></article>
+        <article class="card glass"><h2>Important concepts</h2><dl id="conceptsList" class="concepts"></dl></article>
+        <article class="card glass conclusion"><h2>Conclusion</h2><p id="conclusionText"></p></article>
+        <div class="actions">
+          <button id="saveBtn" class="btn primary" type="button">Save Notes</button>
+          <button id="copyBtn" class="btn ghost" type="button">Copy Summary</button>
+          <button id="againBtn" class="btn ghost" type="button">Generate New Summary</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
